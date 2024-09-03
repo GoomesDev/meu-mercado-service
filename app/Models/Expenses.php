@@ -10,26 +10,27 @@ class Expenses extends Model
     protected $connection = 'mysql';
     protected $table = 'expenses';
     protected $fillable = [
-	'name',
-	'price',
+        'name',
+        'price',
+        'market'
     ];
 
-    public function listAll()
+    public static function listAll()
     {
-	return self::all();
+	    return self::all();
     }
 
-    public function listByMarket($market)
+    public static function listByMarket($market)
     {
-	return self::where('market', $market)->get();
+	    return self::where('market', $market)->get();
     }
 
-    public function createExpense($params)
+    public static function createExpense($params)
     {
-	return self::create([
-		'name'=>$params->name,
-		'price'=>$params->price,
-		'market'=>$params->market
-	]);
+        return self::create([
+            'name'=>$params['name'],
+            'price'=>$params['price'],
+            'market'=>$params['market']
+        ]);
     }
 }
